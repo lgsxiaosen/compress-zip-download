@@ -50,7 +50,9 @@ public class ZipUtils {
     public static void getZipInputStream(List<CompressFileDto> list, ZipOutputStream zos){
         try {
             for (CompressFileDto compress: list){
-                zipInputStream(compress.getIn(), zos, compress.getFileName(), compress.isFile());
+                try (InputStream in = compress.getIn()){
+                    zipInputStream(in, zos, compress.getFileName(), compress.isFile());
+                }
             }
         } catch (Exception e) {
             logger.error("压缩异常：error={}", e.toString());
