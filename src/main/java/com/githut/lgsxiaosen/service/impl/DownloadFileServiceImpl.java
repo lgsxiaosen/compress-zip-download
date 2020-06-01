@@ -40,18 +40,21 @@ public class DownloadFileServiceImpl implements DownloadFileService {
             CompressFileDto compress = new CompressFileDto();
             compress.setFileName("新建文本文档.txt");
             compress.setIn(io1);
-            compress.setPath("");
+            compress.setFile(true);
             CompressFileDto compress1 = new CompressFileDto();
-            compress1.setFileName("test1.txt");
+            compress1.setFileName("data1\\test1.txt");
             compress1.setIn(io2);
-            compress1.setPath("data1");
+            compress.setFile(true);
             CompressFileDto compress2 = new CompressFileDto();
-            compress2.setFileName("test2.txt");
+            compress2.setFileName("data1\\te\\test2.txt");
             compress2.setIn(io3);
-            compress2.setPath("data1\\te");
+            compress2.setFile(true);
+            CompressFileDto compress3 = new CompressFileDto();
+            compress3.setFileName("data1\\tet");
             list.add(compress);
             list.add(compress1);
             list.add(compress2);
+            list.add(compress3);
             ZipUtils.getZipInputStream(list, zos);
         }catch (Exception e){
             logger.info("下载文件异常：{}", e.toString());

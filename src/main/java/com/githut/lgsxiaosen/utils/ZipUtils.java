@@ -32,18 +32,16 @@ public class ZipUtils {
         return "";
     }
 
-    public static void zipInputStream(InputStream io, ZipOutputStream zos, String fileName, String pathName) throws Exception{
+    public static void zipInputStream(InputStream io, ZipOutputStream zos, String fileName, boolean isFile) throws Exception{
         byte[] buf = new byte[1024];
-        String name = fileName;
-        if (StringUtils.isNotBlank(pathName)){
-            name = pathName + File.separator + name;
-        }
-        zos.putNextEntry(new ZipEntry(name));
-        if (Objects.nonNull(io)){
+        if (Objects.nonNull(io)&&isFile){
+            zos.putNextEntry(new ZipEntry(fileName));
             int len;
             while ((len = io.read(buf)) != -1){
                 zos.write(buf, 0, len);
             }
+        }else if(!isFile){
+            zos.putNextEntry(new ZipEntry(fileName + "/"));
         }
         // Complete the entry
         zos.closeEntry();
@@ -52,7 +50,7 @@ public class ZipUtils {
     public static void getZipInputStream(List<CompressFileDto> list, ZipOutputStream zos){
         try {
             for (CompressFileDto compress: list){
-                zipInputStream(compress.getIn(), zos, compress.getFileName(), compress.getPath());
+                zipInputStream(compress.getIn(), zos, compress.getFileName(), compress.isFile());
             }
         } catch (Exception e) {
             logger.error("压缩异常：error={}", e.toString());
