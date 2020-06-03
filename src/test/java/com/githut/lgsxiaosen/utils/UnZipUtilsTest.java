@@ -21,8 +21,8 @@ public class UnZipUtilsTest {
         String unZipPath = "D:\\测试\\解压";
         try (InputStream in = new FileInputStream(zipPath)){
             MultipartFile file = new MockMultipartFile("file", "zip-test.zip", "", in);
-            List<CompressFileDto> list = UnZipUtils.unZip(file, unZipPath);
-//            List<CompressFileDto> list = UnZipUtils.unZip2(file);
+//            List<CompressFileDto> list = UnZipUtils.unZip(file, unZipPath);
+            List<CompressFileDto> list = UnZipUtils.unZip2(file);
             for (CompressFileDto commpress: list){
                 File file1 = new File(unZipPath + File.separator + commpress.getFileName());
 //                if (!file1.exists()){
