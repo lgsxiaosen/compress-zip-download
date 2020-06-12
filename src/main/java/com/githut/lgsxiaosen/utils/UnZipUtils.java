@@ -28,7 +28,7 @@ public class UnZipUtils {
         try {
             File sourceFile = new File(path + File.separator + file.getOriginalFilename());
             file.transferTo(sourceFile.getAbsoluteFile());
-            try(ZipFile zipFile = new ZipFile(sourceFile)){
+            try(ZipFile zipFile = new ZipFile(sourceFile, Charset.forName("GBK"))){
                 Enumeration<?> entries = zipFile.entries();
                 while (entries.hasMoreElements()) {
                     ZipEntry entry = (ZipEntry) entries.nextElement();
