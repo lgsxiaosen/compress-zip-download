@@ -17,7 +17,7 @@ public class UnZipUtilsTest {
     private static final Logger logger = LoggerFactory.getLogger(UnZipUtilsTest.class);
 
     public static void main(String[] args){
-        String zipPath = "D:\\CODE\\personal-code\\zip-test.zip";
+        String zipPath = "D:\\测试\\解压\\test.zip";
         String unZipPath = "D:\\测试\\解压";
         try (InputStream in = new FileInputStream(zipPath)){
             MultipartFile file = new MockMultipartFile("file", "zip-test.zip", "", in);

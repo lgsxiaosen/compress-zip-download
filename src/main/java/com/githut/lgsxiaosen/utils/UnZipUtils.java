@@ -67,7 +67,7 @@ public class UnZipUtils {
     public static List<CompressFileDto> unZip2(MultipartFile file){
         List<CompressFileDto> list = new ArrayList<>();
         // 解压
-        try (ZipInputStream zis = new ZipInputStream(file.getInputStream())){
+        try (ZipInputStream zis = new ZipInputStream(file.getInputStream(), Charset.forName("GBK"))){
             ZipEntry ze = null;
             //循环遍历
             while ((ze = zis.getNextEntry()) != null) {
@@ -87,8 +87,8 @@ public class UnZipUtils {
                     compress.setIn(in);
                 }
                 String name = ze.getName();
-                String fileName = "";
-                if (Objects.nonNull(name)){
+                String fileName = name;
+                if (Objects.nonNull(name)&&name.contains("/")){
                     int i = name.lastIndexOf("/");
                     fileName = name.substring(i).split("/")[1];
                 }
