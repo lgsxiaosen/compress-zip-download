@@ -62,6 +62,41 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>2.4.0</version>
+				<configuration>
+					<!--from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字-->
+					<from>
+						<!--使用openjdk官方镜像，装好了jdk8-->
+						<image>openjdk:8u181-jdk</image>
+					</from>
+					<to>
+						<!--镜像名称和tag，使用了mvn内置变量${project.version}，表示当前工程的version-->
+						<image>job/${project.name}</image>
+					</to>
+					<!--容器相关的属性-->
+					<container>
+						<mainClass>com.githut.lgsxiaosen.IoUtilsApplication</mainClass>
+						<!--指定运行的参数-->
+<!--						<environment>-->
+<!--							<spring.profiles.active>pro</spring.profiles.active>-->
+<!--						</environment>-->
+						<!--jvm内存参数-->
+						<!--<jvmFlags>
+                            <jvmFlag>-Xms4g</jvmFlag>
+                            <jvmFlag>-Xmx4g</jvmFlag>
+                        </jvmFlags>
+                        &lt;!&ndash;要暴露的端口&ndash;&gt;
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                        &lt;!&ndash;使用该参数将镜像的创建时间与系统时间对其&ndash;&gt;
+                        <useCurrentTimestamp>true</useCurrentTimestamp>-->
+					</container>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

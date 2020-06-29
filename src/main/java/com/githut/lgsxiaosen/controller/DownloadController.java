@@ -35,4 +35,9 @@ public class DownloadController {
             downloadFileService.download(zos);
         }
     }
+
+    @GetMapping("/")
+    public String helloWorld(){
+        return "hello world!";
+    }
 }
